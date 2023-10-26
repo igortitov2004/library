@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId_persons()})}" enctype="multipart/form-data">
+    <label for="fullName">Введите ФИО:</label>
+    <input type="text"  th:value="${person.getFullName()}" id="fullName" th:name="fullName"/><br><br>
+    <label for="yearOfBirth">Введите год рождения:</label>
+    <input type="number"  th:value="${person.getYearOfBirth()}" id="yearOfBirth" th:name="yearOfBirth"/><br>
+    <input type="submit" value="Добавить">
+</form>
+</body>
+</html>
