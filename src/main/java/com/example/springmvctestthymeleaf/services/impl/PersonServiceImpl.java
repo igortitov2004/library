@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,10 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> people(String fullName) {
         if(fullName!=null) return personRepository.findPersonByFullNameContaining(fullName);
         return personRepository.findAll();
+    }
+    @Override
+    public Optional<Person> getPersonByFullName(String fullName){
+        return personRepository.findPersonByFullNameContaining(fullName).stream().findAny();
     }
     @Override
     public Person getPersonById(Long id) {

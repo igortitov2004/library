@@ -1,41 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>BOOKS</title>
+    <title>Книги</title>
 </head>
 <body>
+<h3><a th:href="@{/}">Назад</a></h3><hr>
 <form th:action="@{/books}" th:methot="GET">
     <input th:type="text" th:name="name">
     <input th:type="submit" th:value="Поиск">
-    </form>
-
-
+    </form><br>
 <table th:border="1">
     <tr>
         <th>ID</th>
         <th>Название</th>
         <th>Автор</th>
         <th>Год</th>
-<!--        <th>Читатель</th>-->
     </tr>
-
     <div th:each = "book : ${books}">
         <tr>
             <th th:text="${book.getId_books}"/>
             <th><a th:href="@{/books/{id}(id=${book.getId_books()})}" th:text="${book.getName}"></a></th>
             <th th:text="${book.getAuthor()}"/>
             <th th:text="${book.getYear()}"/>
-<!--            <th th:if="${book.getPerson()}!=null" th:text="${book.getPerson().getFullName()}"/>-->
-<!--            <th th:unless="${book.getPerson()}!=null" th:text="${'Книга свободна'}"/>-->
         </tr>
     </div>
-</table>
+</table><hr>
 <form th:action="@{/books/new}" th:method="GET">
     <input type="submit" value="Добавить книгу">
 </form>
-
-
-
 </body>
 </html>

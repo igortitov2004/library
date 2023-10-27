@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Редактирование человека</title>
 </head>
 <body>
+<h2><a th:href="@{/people}" style="text-decoration: none">Назад</a></h2><hr>
 <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId_persons()})}" enctype="multipart/form-data">
     <label for="fullName">Введите ФИО:</label>
     <input type="text"  th:value="${person.getFullName()}" id="fullName" th:name="fullName"/><br><br>

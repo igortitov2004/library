@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Добавление человека</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/people}" enctype="multipart/form-data">
+<h2><a th:href="@{/people}" style="text-decoration: none">Назад</a></h2><hr>
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="fullName">Введите ФИО:</label>
-    <input type="text"  id="fullName" th:name="fullName"/><br><br>
+    <input type="text" th:field="*{fullName}" id="fullName"  /><br><br>
+    <div style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"><br></div>
     <label for="yearOfBirth">Введите год рождения:</label>
-    <input type="number" id="yearOfBirth" th:name="yearOfBirth"/><br>
+    <input type="number" th:field="*{yearOfBirth}" id="yearOfBirth" /><br>
     <input type="submit" value="Добавить">
 </form>
 </body>

@@ -45,4 +45,15 @@ public class BookController {
         bookServiceImpl.updateReader(id,book);
         return "redirect:/books";
     }
+
+    @GetMapping("/{id}/edit")
+    public String bookEdit(@PathVariable(value = "id") Long id, Model model){
+        model.addAttribute("book",bookServiceImpl.getBookById(id));
+        return "books/bookEditing";
+    }
+    @PatchMapping("/{id}")
+    public String saveModifiedBook(@ModelAttribute("book") Book book,@PathVariable(value = "id") Long id){
+        bookServiceImpl.update(id,book);
+        return "redirect:/books";
+    }
 }

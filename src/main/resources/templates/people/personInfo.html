@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Информация о человеке</title>
 </head>
 <body>
-<a th:text="${person.getFullName}"/>
-<a th:text="${person.getYearOfBirth}"/><hr>
-
+<h2><a th:href="@{/people}" style="text-decoration: none">Назад</a></h2><hr>
+<a th:text="${person.getFullName+', '+person.getYearOfBirth}"/>
+<hr>
 <div th:if="${not #lists.isEmpty(books)}">
-    <h3>Книги:</h3>
+    <h4>Книги:</h4>
     <div th:each="book : ${books}">
-        <a th:text="${book.getName}"/>
-        <a th:text="${book.getAuthor}"/>
-        <a th:text="${book.getYear}"/>
+        <a th:text="${book.getName+', '+book.getAuthor+', '+book.getYear}"/>
     </div><hr>
 </div>
 <div th:unless="${not #lists.isEmpty(books)}">
-<h3>Книги отсутствуют!</h3>
-</div><hr>
+<h3>Книги отсутствуют!</h3><hr>
+</div>
 <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId_persons()})}">
     <input type="submit" value="Редактировать">
 </form><br>

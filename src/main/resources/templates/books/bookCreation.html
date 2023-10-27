@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Добавление книги</title>
 </head>
 <body>
+<h2><a th:href="@{/books}" style="text-decoration: none">Назад</a></h2><hr>
 <form th:method="POST" th:action="@{/books}" enctype="multipart/form-data">
   <label for="name">Введите название:</label>
   <input type="text"  id="name" th:name="name"/><br><br>

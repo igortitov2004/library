@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>PEOPLE</title>
+    <title>Люди</title>
 </head>
 <body>
+<h3><a th:href="@{/}">Назад</a></h3><hr>
 <form th:action="@{/people}" th:methot="GET">
     <input th:type="text" th:name="fullName">
     <input th:type="submit" th:value="Поиск">
-
 </form><br>
-
 <table th:border="1">
     <tr>
         <th>ID</th>
         <th>Ф.И.О</th>
         <th>Год рождения</th>
     </tr>
-
     <div th:each = "person : ${people}">
         <tr>
             <th th:text="${person.getId_persons}"/>
@@ -25,12 +23,9 @@
             <th th:text="${person.getYearOfBirth()}"/>
         </tr>
     </div>
-
 </table><hr>
-
 <form th:action="@{/people/new}" th:method="GET">
     <input type="submit" value="Добавить человека">
 </form>
-
 </body>
 </html>

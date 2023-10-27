@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование книги</title>
+</head>
+<body>
+<h2><a th:href="@{/books}" style="text-decoration: none">Назад</a></h2><hr>
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId_books()})}" enctype="multipart/form-data">
+  <label for="name">Введите название:</label>
+  <input type="text"  th:value="${book.getName()}" id="name" th:name="name"/><br><br>
+  <label for="author">Введите автора:</label>
+  <input type="text"  th:value="${book.getAuthor()}" id="author" th:name="author"/><br><br>
+  <label for="year">Введите год:</label>
+  <input type="number"  th:value="${book.getYear()}" id="year" th:name="year"/><br>
+  <input type="submit" value="Добавить">
+</form>
+</body>
+</html>

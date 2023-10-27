@@ -14,7 +14,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     @Override
     public List<Book> books(String name) {
-        if(name!=null) return bookRepository.findBookByNameContains(name);
+        if(name!=null) return bookRepository.findBookByNameContaining(name);
         return bookRepository.findAll();
     }
     @Override
@@ -35,7 +35,6 @@ public class BookServiceImpl implements BookService {
         bookToBeUpdated.setName(book.getName());
         bookToBeUpdated.setAuthor(book.getAuthor());
         bookToBeUpdated.setYear(book.getYear());
-        bookToBeUpdated.setPerson(book.getPerson());
         bookRepository.save(bookToBeUpdated);
     }
 

@@ -2,9 +2,11 @@ package com.example.springmvctestthymeleaf.controllers;
 
 import com.example.springmvctestthymeleaf.models.Person;
 import com.example.springmvctestthymeleaf.services.impl.PersonServiceImpl;
+import com.example.springmvctestthymeleaf.util.PersonValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -12,17 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/people")
 public class PersonController {
     private final PersonServiceImpl personServiceImpl;
+    private final PersonValidator personValidator;
     @GetMapping()
     public String people(@RequestParam(name = "fullName",required = false) String fullName, Model model){
         model.addAttribute("people",personServiceImpl.people(fullName));
         return "people/people";
     }
     @GetMapping("/new")
-    public String newPerson(){
+    public String newPerson(@ModelAttribute(name = "person") Person person){
         return "people/personCreation";
     }
     @PostMapping()
-    public String create(Person person){
+    public String create(@ModelAttribute("person") Person person, BindingResult bindingResult){
+        personValidator.validate(person,bindingResult);
+        if(bindingResult.hasErrors()){
+            return "people/personCreation";
+        }
         personServiceImpl.save(person);
         return "redirect:/people";
     }
