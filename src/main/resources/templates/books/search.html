@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2><a th:href="@{/books}" style="text-decoration: none">Назад</a></h2><hr>
+<form th:action="@{/books/search}" th:methot="GET">
+  <input th:type="text" th:name="name">
+  <input th:type="submit" th:value="Поиск">
+</form><br>
+<div th:if="${isBook}">
+    <div th:if="${book}==null">
+        <a th:text="${'Книга отсутствует!'}"/><hr>
+    </div>
+    <div th:unless="${book}==null">
+        <a th:text="${book.getName+', '+book.getAuthor+', '+book.getYear}"/><br><br>
+        <div th:if="${book.getPerson}!=null">
+            <a th:text="${'Книга сейчас у:'+book.getPerson().getFullName()}"></a>
+        </div>
+        <div th:unless="${book.getPerson}!=null">
+            <a th:text="${'Книга сейчас свободна.'}"></a><br><br>
+        </div><hr>
+    </div>
+</div>
+
+</body>
+</html>

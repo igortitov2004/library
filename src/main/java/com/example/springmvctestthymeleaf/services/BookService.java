@@ -14,4 +14,6 @@ public interface BookService {
     void update(Long id,Book book);
 
     void updateReader(Long id,Book book);
+    List<Book> pageOfBooks(int page,int itemsPerPage);
+
 }

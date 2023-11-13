@@ -15,10 +15,30 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
     private final BookServiceImpl bookServiceImpl;
     private final PersonServiceImpl personServiceImpl;
+//    @GetMapping()
+//    public String books(@RequestParam(name = "name",required = false) String name, Model model){
+//        model.addAttribute("books",bookServiceImpl.books(name));
+//        return "books/books";
+//    }
+
     @GetMapping()
-    public String books(@RequestParam(name = "name",required = false) String name, Model model){
-        model.addAttribute("books",bookServiceImpl.books(name));
+    public String pageOfBooks(@RequestParam(name = "page",defaultValue = "1") int page,
+                              @RequestParam(name = "itemsPerPage",defaultValue = "10") int itemsPerPage,
+                              Model model){
+        model.addAttribute("page",page);
+        model.addAttribute("itemsPerPage",itemsPerPage);
+        model.addAttribute("books",bookServiceImpl.pageOfBooks(page-1,itemsPerPage));
         return "books/books";
+    }
+    @GetMapping("/startSearch")
+    public String startSearch(){
+        return "books/search";
+    }
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "name",required = false) String name, Model model){
+        model.addAttribute("book",bookServiceImpl.book(name));
+        model.addAttribute("isBook",true);
+        return "books/search";
     }
     @GetMapping("/new")
     public String newBook(){

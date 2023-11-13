@@ -3,6 +3,7 @@ package com.example.springmvctestthymeleaf.controllers;
 import com.example.springmvctestthymeleaf.models.Person;
 import com.example.springmvctestthymeleaf.services.impl.PersonServiceImpl;
 import com.example.springmvctestthymeleaf.util.PersonValidator;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,7 @@ public class PersonController {
         return "people/personCreation";
     }
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person, BindingResult bindingResult){
+    public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
         personValidator.validate(person,bindingResult);
         if(bindingResult.hasErrors()){
             return "people/personCreation";
@@ -36,7 +37,7 @@ public class PersonController {
     @GetMapping("/{id}")
     public String personInfo(@PathVariable(value = "id") Long id, Model model){
         model.addAttribute("person",personServiceImpl.getPersonById(id));
-        model.addAttribute("books",personServiceImpl.getPersonById(id).getBooks());
+        model.addAttribute("books",personServiceImpl.isExpired(personServiceImpl.getPersonById(id).getBooks()));
         return "people/personInfo";
     }
     @DeleteMapping("/{id}")

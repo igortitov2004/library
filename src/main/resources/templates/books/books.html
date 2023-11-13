@@ -5,11 +5,14 @@
     <title>Книги</title>
 </head>
 <body>
-<h3><a th:href="@{/}">Назад</a></h3><hr>
+<h3><a th:href="@{/}" style="text-decoration: none">Назад</a></h3><hr>
 <form th:action="@{/books}" th:methot="GET">
-    <input th:type="text" th:name="name">
-    <input th:type="submit" th:value="Поиск">
-    </form><br>
+    Страница:
+    <input th:type="number" th:value="${page}" required th:name="page"><br><br>
+    Количество на странице:
+    <input th:type="number" th:value="${itemsPerPage}" required  th:name="itemsPerPage"><br><br>
+    <input th:type="submit" th:value="Показать">
+</form><hr>
 <table th:border="1">
     <tr>
         <th>ID</th>
@@ -28,6 +31,9 @@
 </table><hr>
 <form th:action="@{/books/new}" th:method="GET">
     <input type="submit" value="Добавить книгу">
+</form><br>
+<form th:action="@{/books/startSearch}" th:method="GET">
+    <input type="submit" value="Поиск">
 </form>
 </body>
 </html>
