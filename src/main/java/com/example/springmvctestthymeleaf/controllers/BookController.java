@@ -24,10 +24,12 @@ public class BookController {
     @GetMapping()
     public String pageOfBooks(@RequestParam(name = "page",defaultValue = "1") int page,
                               @RequestParam(name = "itemsPerPage",defaultValue = "10") int itemsPerPage,
+                              @RequestParam(name = "isSorted",required = false) boolean isSorted,
                               Model model){
+        model.addAttribute("books",bookServiceImpl.pageOfBooks(page-1,itemsPerPage,isSorted));
         model.addAttribute("page",page);
         model.addAttribute("itemsPerPage",itemsPerPage);
-        model.addAttribute("books",bookServiceImpl.pageOfBooks(page-1,itemsPerPage));
+        model.addAttribute("isSorted",isSorted);
         return "books/books";
     }
     @GetMapping("/startSearch")

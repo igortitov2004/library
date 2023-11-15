@@ -10,7 +10,7 @@
 <hr>
 <div th:if="${not #lists.isEmpty(books)}">
     <h4>Книги:</h4>
-    <div th:each="book : ${books}"><br>
+    <div th:each="book : ${books}">
         <div style="color:red" th:if="${book.isExpired}">
             <a th:text="${book.getName+', '+book.getAuthor+', '+book.getYear}"/>
         </div>

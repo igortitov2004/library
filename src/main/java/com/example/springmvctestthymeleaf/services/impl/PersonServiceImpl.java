@@ -30,9 +30,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findPersonByFullNameContaining(fullName).stream().findAny();
     }
     public List<Book> isExpired(List<Book> books){
-        for (Book book : books) {
-            book.setExpired(TimeUnit.DAYS.convert(new Date().getTime() - book.getDateOfBookTake().getTime(), TimeUnit.MILLISECONDS) > 10);
-        }
+        books.forEach(book -> book.setExpired(TimeUnit.DAYS.convert(new Date().getTime() - book.getDateOfBookTake().getTime(), TimeUnit.MILLISECONDS) > 10));
         return books;
     }
     @Override

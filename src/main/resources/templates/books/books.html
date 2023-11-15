@@ -8,11 +8,14 @@
 <h3><a th:href="@{/}" style="text-decoration: none">Назад</a></h3><hr>
 <form th:action="@{/books}" th:methot="GET">
     Страница:
-    <input th:type="number" th:value="${page}" required th:name="page"><br><br>
+    <input type="number" th:value="${page}" required th:name="page"><br><br>
     Количество на странице:
-    <input th:type="number" th:value="${itemsPerPage}" required  th:name="itemsPerPage"><br><br>
-    <input th:type="submit" th:value="Показать">
+    <input type="number" th:value="${itemsPerPage}" required  th:name="itemsPerPage"><br><br>
+    Сортировка:
+    <input type="checkbox" th:checked="${isSorted}"  th:name="isSorted"><br><br>
+    <input type="submit" th:value="Показать">
 </form><hr>
+
 <table th:border="1">
     <tr>
         <th>ID</th>

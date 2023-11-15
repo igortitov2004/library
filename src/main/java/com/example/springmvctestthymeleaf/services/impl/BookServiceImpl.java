@@ -20,19 +20,16 @@ import java.util.concurrent.TimeUnit;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
-
-    @Override
-    public List<Book> books(String name) {
-        if(name!=null) return bookRepository.findBookByNameContaining(name);
-        return bookRepository.findAll();
-    }
-
     public Book book(String name){
         return bookRepository.findBookByNameStartingWith(name);
     }
     @Override
-    public List<Book> pageOfBooks(int page,int itemsPerPage){
-        return bookRepository.findAll(PageRequest.of(page,itemsPerPage).withSort(Sort.Direction.ASC, "year")).getContent();
+    public List<Book> pageOfBooks(int page,int itemsPerPage,boolean isSorted){
+        if(isSorted){
+            return bookRepository.findAll(PageRequest.of(page,itemsPerPage).withSort(Sort.Direction.ASC, "name")).getContent();
+        }else{
+            return bookRepository.findAll(PageRequest.of(page,itemsPerPage)).getContent();
+        }
     }
     @Override
     public void save(Book book) {

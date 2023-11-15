@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book,Long> {
     List<Book> findBookByNameContaining(String name);
+
     Book findBookByNameStartingWith(String name);
     @Override
     Page<Book> findAll(Pageable pageable);
